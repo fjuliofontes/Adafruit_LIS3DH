@@ -222,6 +222,12 @@
  * enable interrupt request.)
  */
 #define LIS3DH_REG_INT1CFG 0x30
+
+/*!
+ *  INT2_CFG
+ */
+#define LIS3DH_REG_INT2CFG 0x34
+
 /*!
  *  INT1_SRC
  *   [0, IA, ZH, ZL, YH, YL, XH, XL]
@@ -343,6 +349,16 @@ typedef enum {
 
 } lis3dh_dataRate_t;
 
+typedef enum {
+	INT_1 = 1,
+	INT_2
+} lis3dh_interrupt_t;
+
+typedef enum {
+	DET_STOP,
+	DET_MOVE,
+} lis3dh_event_t;
+
 /*!
  *  @brief  Class that stores state and functions for interacting with
  *          Adafruit_LIS3DH
@@ -376,6 +392,8 @@ public:
   uint8_t getClick(void);
 
   uint8_t readAndClearInterrupt(void);
+
+  bool intConfig(lis3dh_interrupt_t interrupt, lis3dh_event_t moveType, uint8_t threshold, uint8_t timeDur, bool polarity);
 
   int16_t x; /**< x axis value */
   int16_t y; /**< y axis value */
