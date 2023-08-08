@@ -251,6 +251,32 @@
   0x32 /**< INT1_THS register [0, THS6, THS5, THS4, THS3, THS1, THS0] */
 #define LIS3DH_REG_INT1DUR                                                     \
   0x33 /**< INT1_DURATION [0, D6, D5, D4, D3, D2, D1, D0] */
+
+
+/*!
+ *  INT2_SRC
+ *   [0, IA, ZH, ZL, YH, YL, XH, XL]
+ *    IA  Interrupt active. Default value: 0
+ *        (0: no interrupt has been generated; 1: one or more interrupts have
+ * been generated) ZH  Z high. Default value: 0 (0: no interrupt, 1: Z High
+ * event has occurred) ZL  Z low. Default value: 0 (0: no interrupt; 1: Z Low
+ * event has occurred) YH  Y high. Default value: 0 (0: no interrupt, 1: Y High
+ * event has occurred) YL  Y low. Default value: 0 (0: no interrupt, 1: Y Low
+ * event has occurred) XH  X high. Default value: 0 (0: no interrupt, 1: X High
+ * event has occurred) XL  X low. Default value: 0 (0: no interrupt, 1: X Low
+ * event has occurred)
+ *
+ *    Interrupt 1 source register. Read only register.
+ *    Reading at this address clears INT1_SRC IA bit (and the interrupt signal
+ * on INT 1 pin) and allows the refreshment of data in the INT1_SRC register if
+ * the latched option  was chosen.
+ */
+#define LIS3DH_REG_INT2SRC 0x35
+#define LIS3DH_REG_INT2THS                                                     \
+  0x36 /**< INT1_THS register [0, THS6, THS5, THS4, THS3, THS1, THS0] */
+#define LIS3DH_REG_INT2DUR                                                     \
+  0x37 /**< INT1_DURATION [0, D6, D5, D4, D3, D2, D1, D0] */
+
 /*!
  *  CLICK_CFG
  *   [--, --, ZD, ZS, YD, YS, XD, XS]
