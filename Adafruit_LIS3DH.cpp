@@ -471,13 +471,13 @@ bool Adafruit_LIS3DH::intConfig(lis3dh_interrupt_t interrupt, lis3dh_event_t mov
 	bool returnError = true;
 
   Adafruit_BusIO_Register regToWrite = Adafruit_BusIO_Register(
-      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, (interrupt == INT_1) ? LIS3DH_REG_INT1CFG : LIS3DH_REG_INT2CFG, 1);
+      i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, (interrupt == LIS3DH_INT_1) ? LIS3DH_REG_INT1CFG : LIS3DH_REG_INT2CFG, 1);
 
   Adafruit_BusIO_RegisterBits range_bits = Adafruit_BusIO_RegisterBits(&regToWrite, 6, 0);
 
 	//Build INT_CFG 0x30 or 0x34
 	//Detect movement or stop
-	if(moveType == DET_MOVE) {
+	if(moveType == LIS3DH_DET_MOVE) {
     range_bits.write(0x0A);
   }
 	else {
@@ -485,17 +485,17 @@ bool Adafruit_LIS3DH::intConfig(lis3dh_interrupt_t interrupt, lis3dh_event_t mov
   }
 	
 	//Build INT_THS 0x32 or 0x36
-	regToWrite = Adafruit_BusIO_Register(i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, (interrupt == INT_1) ? LIS3DH_REG_INT1THS : LIS3DH_REG_INT2THS, 1); 
+	regToWrite = Adafruit_BusIO_Register(i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, (interrupt == LIS3DH_INT_1) ? LIS3DH_REG_INT1THS : LIS3DH_REG_INT2THS, 1); 
   range_bits = Adafruit_BusIO_RegisterBits(&regToWrite, 7, 0);
 	range_bits.write(threshold);
 
 	//Build INT_DURATION 0x33 or 0x37
-  regToWrite = Adafruit_BusIO_Register(i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, (interrupt == INT_1) ? LIS3DH_REG_INT1DUR : LIS3DH_REG_INT2DUR, 1); 
+  regToWrite = Adafruit_BusIO_Register(i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, (interrupt == LIS3DH_INT_1) ? LIS3DH_REG_INT1DUR : LIS3DH_REG_INT2DUR, 1); 
   range_bits = Adafruit_BusIO_RegisterBits(&regToWrite, 7, 0);
 	range_bits.write(timeDur);
 
 	// Attach configuration to Interrupt X
-	if(interrupt == INT_1)
+	if(interrupt == LIS3DH_INT_1)
 	{
     regToWrite = Adafruit_BusIO_Register(i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LIS3DH_REG_CTRL3, 1);
     regToWrite.write(0x40); // enable ia1 on int1 pin

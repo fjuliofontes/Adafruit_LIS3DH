@@ -376,18 +376,18 @@ typedef enum {
 } lis3dh_dataRate_t;
 
 typedef enum {
-	INT_1 = 1,
-	INT_2
+	LIS3DH_INT_1 = 1,
+	LIS3DH_INT_2
 } lis3dh_interrupt_t;
 
 typedef enum {
-	DET_STOP,
-	DET_MOVE,
+	LIS3DH_DET_STOP,
+	LIS3DH_DET_MOVE,
 } lis3dh_event_t;
 
 typedef enum {
-  HIGH_RESOLUTION_MODE = 0,
-  LOW_POWER_MODE = 1
+  LIS3DH_HIGH_RESOLUTION_MODE = 0,
+  LIS3DH_LOW_POWER_MODE = 1
 } lis3dh_power_mode_t;
 
 /*!
