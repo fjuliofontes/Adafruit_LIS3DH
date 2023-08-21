@@ -513,3 +513,18 @@ bool Adafruit_LIS3DH::intConfig(lis3dh_interrupt_t interrupt, lis3dh_event_t mov
 	
 	return returnError;
 }
+
+bool Adafruit_LIS3DH::lowPowerConfig(lis3dh_power_mode_t power_mode) {
+  bool returnError = true;
+  Adafruit_BusIO_Register regToWrite = Adafruit_BusIO_Register(
+    i2c_dev, spi_dev, ADDRBIT8_HIGH_TOREAD, LIS3DH_REG_CTRL1, 1);
+
+  Adafruit_BusIO_RegisterBits range_bits = Adafruit_BusIO_RegisterBits(&regToWrite, 1, 3);
+  range_bits.write(power_mode);
+
+  if (((regToWrite.read() & 0x8) >> 3) != power_mode) {
+    returnError = true;
+  }
+
+  return returnError;
+}

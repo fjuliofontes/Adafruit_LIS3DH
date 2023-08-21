@@ -385,6 +385,11 @@ typedef enum {
 	DET_MOVE,
 } lis3dh_event_t;
 
+typedef enum {
+  HIGH_RESOLUTION_MODE = 0,
+  LOW_POWER_MODE = 1
+} lis3dh_power_mode_t;
+
 /*!
  *  @brief  Class that stores state and functions for interacting with
  *          Adafruit_LIS3DH
@@ -420,6 +425,7 @@ public:
   uint8_t readAndClearInterrupt(void);
 
   bool intConfig(lis3dh_interrupt_t interrupt, lis3dh_event_t moveType, uint8_t threshold, uint8_t timeDur, bool polarity);
+  bool lowPowerConfig(lis3dh_power_mode_t power_mode);
 
   int16_t x; /**< x axis value */
   int16_t y; /**< y axis value */
